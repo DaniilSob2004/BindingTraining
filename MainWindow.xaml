@@ -1,0 +1,36 @@
+﻿<Window x:Class="BindingTraining.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BindingTraining"
+        mc:Ignorable="d"
+        Title="BindingTraining" Height="400" Width="600" WindowStartupLocation="CenterScreen" MinWidth="100" MinHeight="100">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Padding="4" VerticalAlignment="Center">X:</TextBlock>
+                <TextBox x:Name="textX" Margin="5,5,5,0" FontSize="15" MinWidth="40" Text="50"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Padding="4" VerticalAlignment="Center">Y:</TextBlock>
+                <TextBox x:Name="textY" Margin="5.3,5,5,0" FontSize="15" MinWidth="40" Text="100"></TextBox>
+            </StackPanel>
+            <Canvas Grid.Column="1" Name="canvas">
+                <Rectangle Name="rec" Width="100" Height="60" Fill="Red" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp" MouseMove="Rectangle_MouseMove">
+                    <Rectangle.RenderTransform>
+                        <TranslateTransform x:Name="trans" Y="{Binding Text, ElementName=textY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                           X="{Binding Text, ElementName=textX, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+            </Canvas>
+        </StackPanel>
+    </Grid>
+    
+</Window>
